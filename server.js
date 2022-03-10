@@ -22,7 +22,7 @@ app.use(bodyParser.json())
    .use('/auth', require('./routes/auth'));
 
 const corsOptions = {
-   origin: "https://nameless-ridge-51894.herokuapp.com/",
+   origin: "https://cse341-wdd330-task-manager.herokuapp.com/",
    optionsSuccessStatus: 200
  };
  app.use(cors(corsOptions));
