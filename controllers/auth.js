@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require('../models/user');
 const User = db.User;
 
 exports.createUser = (req, res) => {
@@ -24,3 +24,10 @@ exports.createUser = (req, res) => {
 };
 
 // TODO: Add other user logic here and in the user.js route
+exports.signup = (req, res, next) => {
+   return;
+}
+
+exports.login = (req, res, next) => {
+   return;
+}
