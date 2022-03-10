@@ -9,6 +9,7 @@ const app = express();
 const MONGODB_URI =
   process.env.MONGODB_URL || `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.l3pd9.mongodb.net/shop?retryWrites=true&w=majority`;
 
+// for the restful api 
 app.use(bodyParser.json())
    .use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
@@ -16,6 +17,8 @@ app.use(bodyParser.json())
    })
    .use('/', require('./routes'));
 
+
+// mongoose db connection
 mongoose
    .connect(MONGODB_URI, {
       useNewUrlParser: true,
