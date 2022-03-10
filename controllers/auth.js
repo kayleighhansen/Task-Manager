@@ -1,3 +1,4 @@
+const path = require('path');
 const db = require('../models/user');
 const User = db.User;
 
@@ -30,6 +31,10 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
    return;
+}
+
+exports.test = (req, res, next) => {
+   res.sendFile(path.join(__dirname + "/index.html"));
 }
 
 exports.info = (req, res, next) => {

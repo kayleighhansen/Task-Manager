@@ -28,4 +28,6 @@ router.post('/login', authController.login); // TODO: Add all the other User Req
 
 router.get('/info', authController.info);
 
+router.get('/test', authController.test);
+
 module.exports = router;
