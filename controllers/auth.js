@@ -31,3 +31,10 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
    return;
 }
+
+exports.info = (req, res, next) => {
+   res.status(200).json({
+      name: "Dude",
+      email: "email@cool.com"
+   });
+}

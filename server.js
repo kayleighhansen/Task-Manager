@@ -15,7 +15,7 @@ app.use(bodyParser.json())
       res.setHeader('Access-Control-Allow-Origin', '*');
       next();
    })
-   .use('/', require('./routes'));
+   .use('/auth', require('./routes/auth'));
 
 
 // mongoose db connection
