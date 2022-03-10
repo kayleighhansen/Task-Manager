@@ -11,3 +11,8 @@ You can see all the branches that exist by using <code>git branch -a</code>
 <br><br><br>
 Sorry for mansplaining github, I just know they don't teach it all that well in class. 😂 Contact me if you have any questions!
 <br>-Isaac
+<br><br>
+
+<h1>Heroku</h1>
+I've set up a heroku app that will update automatically whenever we push changes to the main branch.<br>
+Here's the link: https://dashboard.heroku.com/apps/cse341-wdd330-task-manager
