@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
@@ -17,7 +18,14 @@ app.use(bodyParser.json())
       res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
       next();
    })
+   // auth routes
    .use('/auth', require('./routes/auth'));
+
+const corsOptions = {
+   origin: "https://nameless-ridge-51894.herokuapp.com/",
+   optionsSuccessStatus: 200
+ };
+ app.use(cors(corsOptions));
 
 
 // mongoose db connection
