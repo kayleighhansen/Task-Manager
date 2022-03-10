@@ -15,4 +15,4 @@ Sorry for mansplaining github, I just know they don't teach it all that well in 
 
 <h1>Heroku</h1>
 I've set up a heroku app that will update automatically whenever we push changes to the main branch.<br>
-Here's the link: https://dashboard.heroku.com/apps/cse341-wdd330-task-manager
+Here's the link: https://cse341-wdd330-task-manager.herokuapp.com/
