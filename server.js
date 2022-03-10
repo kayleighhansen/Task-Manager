@@ -21,11 +21,11 @@ app.use(bodyParser.json())
    // auth routes
    .use('/auth', require('./routes/auth'));
 
-const corsOptions = {
-   origin: "https://cse341-wdd330-task-manager.herokuapp.com/",
-   optionsSuccessStatus: 200
- };
- app.use(cors(corsOptions));
+// const corsOptions = {
+//    origin: "https://cse341-wdd330-task-manager.herokuapp.com/",
+//    optionsSuccessStatus: 200
+//  };
+ app.use(cors());
 
 
 // mongoose db connection
