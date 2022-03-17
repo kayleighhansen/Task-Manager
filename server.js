@@ -21,7 +21,8 @@ app.use(bodyParser.json())
       next();
    })
    // auth routes
-   .use('/auth', require('./routes/auth'));
+   .use('/auth', require('./routes/auth'))
+   .use('/swagger', require('./routes/swagger'));
 
 
 // mongoose db connection
