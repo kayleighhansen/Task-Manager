@@ -2,7 +2,7 @@
   "name": "task-application",
   "version": "1.0.0",
   "description": "A program that allows users to create and follow tasks to improve productivity.",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
