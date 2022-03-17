@@ -18,7 +18,7 @@
     "http"
   ],
   "paths": {
-    "/auth/signup": {
+    "/signup": {
       "put": {
         "tags": [
           "user"
@@ -36,7 +36,7 @@
             "description": "Created user object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserCredentials"
+              "$ref": "#/definitions/User"
             }
           }
         ],
@@ -56,7 +56,7 @@
         }
       }
     },
-    "/auth/login": {
+    "/login": {
       "post": {
         "tags": [
           "user"
@@ -74,7 +74,7 @@
             "description": "Authenticated User",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserCredentials"
+              "$ref": "#/definitions/User"
             }
           }
         ],
@@ -100,7 +100,7 @@
         }
       }
     },
-    "/auth/logout": {
+    "/logout": {
       "post": {
         "tags": [
           "user"
@@ -118,7 +118,7 @@
             "description": "User Session Ended",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserCredentials"
+              "$ref": "#/definitions/User"
             }
           }
         ],
@@ -418,7 +418,7 @@
         }
       }
     },
-    "/companies/updateCompany{companyId}": {
+    "/companies/updateCompany/{companyId}": {
       "put": {
         "tags": [
           "company"
@@ -523,6 +523,9 @@
         "password": {
           "type": "string"
         },
+        "confirmPassword": {
+          "type": "string"
+        },
         "tasks": {
           "type": "array",
           "items": {
@@ -530,17 +533,6 @@
           }
         },
         "company": {
-          "type": "string"
-        }
-      }
-    },
-    "UserCredentials": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string"
-        },
-        "password": {
           "type": "string"
         }
       }
