@@ -8,7 +8,7 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 const MONGODB_URI =
-  process.env.MONGODB_URL || `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.j6osm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+  process.env.MONGODB_URL || `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.j6osm.mongodb.net/task?retryWrites=true&w=majority`;
 
 app.use(cors());
 
