@@ -2,10 +2,6 @@ const path = require('path');
 const db = require('../models/user');
 const User = db.User;
 
-exports.createUser = (req, res) => {
-
-};
-
 // TODO: Add other user logic here and in the user.js route
 exports.signup = (req, res, next) => {
    // This probably needs to be converted to 'signup'.
