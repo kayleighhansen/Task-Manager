@@ -14,7 +14,7 @@ exports.createUser = (req, res) => {
       .save()
       .then((data) => {
          console.log(data);
-         res.status(201).send(data);
+         res.status(201).send(data._id);
       })
       .catch((err) => {
          res.status(500).send({

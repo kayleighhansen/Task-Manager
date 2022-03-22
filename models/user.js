@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-module.exports = mongoose.Schema({
+const userSchema = new Schema({
    first_name: {
       type: String,
       required: true,
@@ -18,6 +19,15 @@ module.exports = mongoose.Schema({
       required: true,
    },
    company: {
-      type: Object,
+      type: String,
+      required: true,
    },
+   tasks: [
+      {
+         type: Schema.Types.ObjectId,
+         ref: "Task"
+      },
+   ],
 });
+
+module.exports = mongoose.model('User', userSchema)
