@@ -32,14 +32,3 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
    return;
 }
-
-exports.test = (req, res, next) => {
-   res.sendFile(path.join(__dirname + "/index.html"));
-}
-
-exports.info = (req, res, next) => {
-   res.status(200).json({
-      name: "Dude",
-      email: "email@cool.com"
-   });
-}
