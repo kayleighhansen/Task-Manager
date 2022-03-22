@@ -4,6 +4,14 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
+// // putting routes here in instead of the index file
+// const swagger = require('./routes/swagger');
+// const taskRoutes = require('./routes/task');
+// const authRoutes = require('./routes/auth');
+// // const companyRoutes = require('./routes/company');
+
+const indexRoutes = require('./routes/index');
+
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -28,8 +36,9 @@ app.use(bodyParser.json())
       );
       next();
    })
-   // auth routes
-   .use('/', require('./routes/index'));
+   // putting routes here in instead of the index file
+   .use('/', indexRoutes);
+
 
 // mongoose db connection
 mongoose
