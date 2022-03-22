@@ -3,8 +3,13 @@ const db = require('../models/user');
 const User = db.User;
 
 exports.createUser = (req, res) => {
+
+};
+
+// TODO: Add other user logic here and in the user.js route
+exports.signup = (req, res, next) => {
    // This probably needs to be converted to 'signup'.
-   if (!req.body.email || !req.body.password) {
+   if (!req.body.email || !req.body.password || !req.body.company) {
       res.status(400).send({ message: 'Cannot provide empty content!' });
       return;
    }
@@ -22,10 +27,6 @@ exports.createUser = (req, res) => {
                err.message || 'An error occurred while creating the user!',
          });
       });
-};
-
-// TODO: Add other user logic here and in the user.js route
-exports.signup = (req, res, next) => {
    return;
 }
 
