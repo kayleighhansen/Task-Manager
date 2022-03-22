@@ -21,7 +21,7 @@
     "/signup": {
       "put": {
         "tags": [
-          "user"
+          "auth"
         ],
         "summary": "Create user",
         "description": "username and password (username needs to be unique)",
@@ -59,7 +59,7 @@
     "/login": {
       "post": {
         "tags": [
-          "user"
+          "auth"
         ],
         "summary": "Authenticate User",
         "description": "username and password",
@@ -103,7 +103,7 @@
     "/logout": {
       "post": {
         "tags": [
-          "user"
+          "auth"
         ],
         "summary": "End User Session",
         "description": "Finish User Session",
