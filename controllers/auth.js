@@ -3,11 +3,10 @@ const bcrypt = require('bcryptjs');
 const db = require('../models/user');
 const User = db.User;
 
-
 // TODO: Add other user logic here and in the user.js route
 exports.signup = (req, res, next) => {
-   // need to encrypt password to save in database as encrypted string!!!
-   if (!req.body.email || !req.body.password) {
+   // This probably needs to be converted to 'signup'.
+   if (!req.body.email || !req.body.password || !req.body.company) {
       res.status(400).send({ message: 'Cannot provide empty content!' });
       return;
    }
@@ -95,3 +94,4 @@ exports.logout = (req, res, next) => {}
 //       email: "email@cool.com"
 //    });
 // }
+
