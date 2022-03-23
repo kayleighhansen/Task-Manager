@@ -26,4 +26,10 @@ router.put(
 
 router.post('/login', authController.login); // TODO: Add all the other User Requests
 
+router.post('/logout', authController.logout); // TODO: Add all the other User Requests
+
+// router.get('/info', authController.info);
+
+// router.get('/test', authController.test);
+
 module.exports = router;
