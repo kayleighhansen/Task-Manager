@@ -21,7 +21,7 @@ const taskSchema = new Schema({
         required: true
     },
     status: {
-        type: string,
+        type: String,
         required: true
     },
     creator_user_id: {
@@ -32,6 +32,10 @@ const taskSchema = new Schema({
     assigned_to: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    priority: {
+        type: String,
+        required: true
     },
     taskId: {
         type: Schema.Types.ObjectId,
