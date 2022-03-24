@@ -25,7 +25,7 @@ exports.signup = (req, res, next) => {
       .save()
       .then((data) => {
          console.log(data); // TODO: Delete this, it's only for testing purposes
-         res.status(201).send(data._id);
+         res.status(201).send(data._id); // Change this to return something else???
       })
       .catch((err) => {
          res.status(500).send({
