@@ -34,7 +34,7 @@ const taskSchema = new Schema({
         ref: 'User'
     },
     priority: {
-        type: String,
+        type: Number,
         required: true
     }
 });
