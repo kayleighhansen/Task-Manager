@@ -36,10 +36,6 @@ const taskSchema = new Schema({
     priority: {
         type: String,
         required: true
-    },
-    taskId: {
-        type: Schema.Types.ObjectId,
-        required: true
     }
 });
 
