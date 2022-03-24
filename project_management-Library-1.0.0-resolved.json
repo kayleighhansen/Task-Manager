@@ -380,7 +380,7 @@
         "tags": [
           "company"
         ],
-        "summary": "find task by Id",
+        "summary": "List all Companies",
         "operationId": "getCompany",
         "produces": [
           "application/json"
