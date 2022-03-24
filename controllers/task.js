@@ -19,8 +19,8 @@ exports.createTask = (res, req, next) => {
         due_date: dueDate,
         status: status,
         creator_user_id: creatorUserId,
-        assigned_to: assignedTo
-        // TODO: Priority?
+        assigned_to: assignedTo,
+        priority: priority
     });
     task
         .save()
