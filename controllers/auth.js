@@ -17,13 +17,32 @@ exports.signup = (req, res, next) => {
    const password = req.body.password; 
    // bcrypt.hash(req.body.password, 12); // TODO: change this to "Hashed Password, once that's implemented"
    const company = req.body.company;
-   const user = new User({
-      email: email,
-      password: password, // TODO: change this to "Hashed Password, once that's implemented"
-      first_name: first_name,
-      last_name: last_name,
-      company: company,
-   })
+   bcrypt
+      .hash(password, 12)
+      .then((hashedPw) => {
+         const user = new User({
+            email: email,
+            password: hashedPw, // TODO: change this to "Hashed Password, once that's implemented"
+            first_name: first_name,
+            last_name: last_name,
+            company: company,
+         });
+         // return user.save();
+         user
+         .save()
+         .then((data) => {
+            console.log(data); // TODO: Delete this, it's only for testing purposes
+            res.status(201).send({
+               message: 'Successfully created user!',
+            })
+         })
+         .catch((err) => {
+            res.status(500).send({
+               message:
+                  err.message || 'An error occurred while creating the user!',
+            });
+         });
+      })
    // const user = new User(userObject);
  
    // Create token
@@ -39,20 +58,20 @@ exports.signup = (req, res, next) => {
    // accessToken = jwt.sign(userObject, process.env.ACCESS_TOKEN_SECRET) //This creates the JWT token
    // res.json({ accessToken: accessToken })
 
-   user
-      .save()
-      .then((data) => {
-         console.log(data); // TODO: Delete this, it's only for testing purposes
-         res.status(201).send({
-            message: 'Successfully created user!',
-         })
-      })
-      .catch((err) => {
-         res.status(500).send({
-            message:
-               err.message || 'An error occurred while creating the user!',
-         });
-      });
+   // user
+   //    .save()
+   //    .then((data) => {
+   //       console.log(data); // TODO: Delete this, it's only for testing purposes
+   //       res.status(201).send({
+   //          message: 'Successfully created user!',
+   //       })
+   //    })
+   //    .catch((err) => {
+   //       res.status(500).send({
+   //          message:
+   //             err.message || 'An error occurred while creating the user!',
+   //       });
+   //    });
 };
 
 exports.login = (req, res, next) => {
@@ -75,10 +94,10 @@ exports.login = (req, res, next) => {
             //    // validationErrors: []
             // });
          }
-         // bcrypt
-         //    .compare(password, user.password)
-         //    .then((doMatch) => {
-               if (user.password === password) {
+         bcrypt
+            .compare(password, user.password)
+            .then((doMatch) => {
+               if (doMatch) {
                   // req.session.isLoggedIn = true;
                   // req.session.user = user;
                   // return req.session.save(err => {
@@ -99,7 +118,7 @@ exports.login = (req, res, next) => {
                //       password: password,
                //    },
                //    // validationErrors: []
-               // });
+               });
             })
             .catch((err) => {
                console.log(err);
