@@ -1,5 +1,7 @@
 const path = require('path');
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 // TODO: Add other user logic here and in the user.js route
@@ -12,7 +14,8 @@ exports.signup = (req, res, next) => {
    const email = req.body.email;
    const first_name = req.body.first_name;
    const last_name = req.body.last_name;
-   const password = req.body.password; // TODO: change this to "Hashed Password, once that's implemented"
+   const password = req.body.password; 
+   // bcrypt.hash(req.body.password, 12); // TODO: change this to "Hashed Password, once that's implemented"
    const company = req.body.company;
    const user = new User({
       email: email,
@@ -20,11 +23,29 @@ exports.signup = (req, res, next) => {
       first_name: first_name,
       last_name: last_name,
       company: company,
-   });
+   })
+   // const user = new User(userObject);
+ 
+   // Create token
+   // const token = jwt.sign(
+   //    { user_id: user._id, email },
+   //    process.env.TOKEN_KEY,
+   //    {
+   //      expiresIn: "2h",
+   //    }
+   //  );
+   //  // save user token
+   //  user.token = token;
+   // accessToken = jwt.sign(userObject, process.env.ACCESS_TOKEN_SECRET) //This creates the JWT token
+   // res.json({ accessToken: accessToken })
+
    user
       .save()
       .then((data) => {
-         res.status(201).send(data._id);
+         console.log(data); // TODO: Delete this, it's only for testing purposes
+         res.status(201).send({
+            message: 'Successfully created user!',
+         })
       })
       .catch((err) => {
          res.status(500).send({
@@ -40,66 +61,57 @@ exports.login = (req, res, next) => {
 
    User.findOne({ email: email })
       .then((user) => {
+         console.log(user);
          if (!user) {
-            return res.status(422).render('auth/login', {
-               path: '/login',
-               pageTitle: 'Login',
-               errorMessage: 'Invalid email or password.',
-               oldInput: {
-                  email: email,
-                  password: password,
-               },
-               // validationErrors: []
-            });
+            return res.status(422)
+            // .render('auth/login', {
+            //    path: '/login',
+            //    pageTitle: 'Login',
+            //    errorMessage: 'Invalid email or password.',
+            //    oldInput: {
+            //       email: email,
+            //       password: password,
+            //    },
+            //    // validationErrors: []
+            // });
          }
-         bcrypt
-            .compare(password, user.password)
-            .then((doMatch) => {
-               if (doMatch) {
+         // bcrypt
+         //    .compare(password, user.password)
+         //    .then((doMatch) => {
+               if (user.password === password) {
                   // req.session.isLoggedIn = true;
                   // req.session.user = user;
                   // return req.session.save(err => {
                   //   console.log(err);
                   // res.redirect('/');
                   // });
+                  accessToken = jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET) //This creates the JWT token
 
-                  return res.status(200);
+                  return res.status(200).json({ accessToken: accessToken })
                }
-               return res.status(422).render('/login', {
-                  path: '/login',
-                  pageTitle: 'Login',
-                  errorMessage: 'Invalid email or password.',
-                  oldInput: {
-                     email: email,
-                     password: password,
-                  },
-                  // validationErrors: []
-               });
+               return res.status(422)
+               // .render('/login', {
+               //    path: '/login',
+               //    pageTitle: 'Login',
+               //    errorMessage: 'Invalid email or password.',
+               //    oldInput: {
+               //       email: email,
+               //       password: password,
+               //    },
+               //    // validationErrors: []
+               // });
             })
             .catch((err) => {
                console.log(err);
-               res.redirect('/login');
+               return res.status(500);
             });
-      })
-      .catch((err) => {
-         const error = new Error(err);
-         error.httpStatusCode = 500;
-         return next(error);
-      });
-
-   res.render('auth/login');
-   return;
+      // })
+      // .catch((err) => {
+      //    const error = new Error(err);
+      //    error.httpStatusCode = 500;
+      //    return next(error);
+      // });
 };
 
 exports.logout = (req, res, next) => {};
 
-// exports.test = (req, res, next) => {
-//    res.sendFile(path.join(__dirname + "/index.html"));
-// }
-
-// exports.info = (req, res, next) => {
-//    res.status(200).json({
-//       name: "Dude",
-//       email: "email@cool.com"
-//    });
-// }
