@@ -1,5 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator');
+const isAuth = require('../middleware/isAuth');
 const router = express.Router();
 
 const authController = require('../controllers/auth');
@@ -20,15 +21,12 @@ router.put(
       body('password').trim().isLength({ min: 5 }),
       body('name').trim().not().isEmpty(),
    ],
+   // isAuth, //This checks for a JWT token, should be used on all other routes like getting tasks/create company etc.
    authController.signup
 );
 
-router.post('/login', authController.login); // TODO: Add all the other User Requests
+router.post('/login', authController.login); // TODO: Add all the other User Request validation
 
-router.post('/logout', authController.logout); // TODO: Add all the other User Requests
-
-// router.get('/info', authController.info);
-
-// router.get('/test', authController.test);
+router.post('/logout', authController.logout); // TODO: Add all the other User Request validation
 
 module.exports = router;

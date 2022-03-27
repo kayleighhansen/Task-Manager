@@ -33,10 +33,10 @@ const taskSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    priority: {
-        type: Number,
-        required: true
-    }
+    // taskId: {
+    //     type: Schema.Types.ObjectId,
+    //     required: true
+    // }
 });
 
 module.exports = mongoose.model('Task', taskSchema);

@@ -611,7 +611,7 @@
           "format": "string"
         },
         "priority": {
-          "type": "string"
+          "type": "integer"
         }
       }
     },
