@@ -5,8 +5,8 @@
     "version": "1.0.0",
     "title": "Project Management"
   },
-  "host": "virtserver.swaggerhub.com",
-  "basePath": "/project_management/Library/1.0.0",
+  "host": "localhost:8080",
+  "basePath": "/",
   "tags": [
     {
       "name": "project",
@@ -14,7 +14,7 @@
     }
   ],
   "schemes": [
-    "https",
+    
     "http"
   ],
   "paths": {
@@ -333,35 +333,36 @@
         }
       }
     },
-    "/companies/addCompany/{companyId}": {
-      "post": {
+    "/company": {
+      "get": {
         "tags": [
           "company"
         ],
-        "summary": "Create company",
-        "description": "Add company to the database",
-        "operationId": "createCompany",
+        "summary": "List One Company",
+        "operationId": "getCompany",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "companyId",
-            "in": "path",
-            "description": "ID of company that needs to be updated",
+            "in": "body",
+            "name": "company",
+            "description": "Pull company info from database",
             "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/Company"
+            }
           }
         ],
         "responses": {
-          "201": {
-            "description": "successfully created company",
+          "200": {
+            "description": "Companies data retrieved",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/Company"
             }
           },
-          "403": {
-            "description": "Invalid Task",
+          "404": {
+            "description": "Task not found",
             "schema": {
               "type": "string"
             }
@@ -405,6 +406,48 @@
           },
           "404": {
             "description": "Task not found",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Failed to process request",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/companies/addCompany/{companyId}": {
+      "post": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Create company",
+        "description": "Add company to the database",
+        "operationId": "createCompany",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "ID of company that needs to be updated",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successfully created company",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "403": {
+            "description": "Invalid Task",
             "schema": {
               "type": "string"
             }
