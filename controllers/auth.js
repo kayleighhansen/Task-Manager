@@ -13,6 +13,12 @@ exports.signup = (req, res, next) => {
       return;
    }
    const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+      const error = new Error('Validation failed.');
+      error.statusCode = 422;
+      error.data = errors.array();
+      throw error;
+   }
 
    const email = req.body.email;
    const first_name = req.body.first_name;
