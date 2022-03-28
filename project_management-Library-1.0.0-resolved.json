@@ -569,12 +569,6 @@
         "confirmPassword": {
           "type": "string"
         },
-        "tasks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Task"
-          }
-        },
         "company": {
           "type": "string"
         }
