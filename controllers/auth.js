@@ -3,14 +3,17 @@ require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const { validationResult } = require("express-validator");
 
 // TODO: Add other user logic here and in the user.js route
 exports.signup = (req, res, next) => {
    // This probably needs to be converted to 'signup'.
    if (!req.body.email || !req.body.password || !req.body.company) {
-      res.status(400).send({ message: 'Cannot provide empty content!' });
+      res.status(400).send({ message: "Cannot provide empty content!" });
       return;
    }
+   const errors = validationResult(req);
+
    const email = req.body.email;
    const first_name = req.body.first_name;
    const last_name = req.body.last_name;
@@ -27,20 +30,16 @@ exports.signup = (req, res, next) => {
             last_name: last_name,
             company: company,
          });
-         // return user.save();
-         user
-         .save()
-         .then((data) => {
-            console.log(data); // TODO: Delete this, it's only for testing purposes
-            res.status(201).send({
-               message: 'Successfully created user!',
-            })
-         })
-         .catch((err) => {
-            res.status(500).send({
-               message:
-                  err.message || 'An error occurred while creating the user!',
-            });
+         return user.save();
+      })
+      .then((data) => {
+         console.log(data); // TODO: Delete this, it's only for testing purposes
+         res.status(201).send(data._id); // Change this to return something else???
+      })
+      .catch((err) => {
+         res.status(500).send({
+            message:
+               err.message || "An error occurred while creating the user!",
          });
       })
    // const user = new User(userObject);
@@ -130,6 +129,7 @@ exports.login = (req, res, next) => {
       //    error.httpStatusCode = 500;
       //    return next(error);
       // });
+
 };
 
 exports.logout = (req, res, next) => {};
