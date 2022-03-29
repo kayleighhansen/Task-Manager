@@ -2,20 +2,21 @@ const Task = require('../models/task');
 const User = require('../models/user');
 const Company = require('../models/company');
 
-exports.createTask = (res, req, next) => {
+exports.createTask = (req, res, next) => {
+    // req = req.req;
     const title = req.body.title;
     const description = req.body.description;
-    const dateCreated = req.body.created;
-    const dueDate = req.body.dueDate;
+    // const dateCreated = req.body.created;
+    const dueDate = req.body.due_date;
     const status = req.body.status;
-    const creatorUserId = req.body.userId;
+    const creatorUserId = req.body.creator_user_id;
     const priority = req.body.priority;
 
     // Create a new task
     const task = new Task({
         title: title,
         description: description,
-        date_created: dateCreated,
+        // date_created: dateCreated,
         due_date: dueDate,
         status: status,
         creator_user_id: creatorUserId,
@@ -24,16 +25,18 @@ exports.createTask = (res, req, next) => {
     // Save task
     task
         .save()
-        .then(result => {
-            return User.findById(creatorUserId);
-        })
+        // TODO: add user logic back in once users are in companies
+        // .then(result => {
+        //     return User.findById(creatorUserId);
+        // })
         .then(user => {
-            return Company.findOne({ employees: user });
+            // return Company.findOne({ employees: user });
+            return Company.findById("6242575c6eba12a30eec4946");
         })
         .then(company => {
             // Add task to company
             company.tasks.push(task);
-            return company.save;
+            return company.save();
         })
         .then(result => {
             res.status(201).json({

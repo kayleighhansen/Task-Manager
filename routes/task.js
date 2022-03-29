@@ -6,7 +6,13 @@ const taskController = require('../controllers/task');
 
 router.get('/'); //, taskController.getTasks
 
-router.post('/add-task'); //, taskController.createTask 
+// TODO: Add validators back in
+router.post(
+    '/add-task',
+    // [
+    //     body('title')
+    // ],
+    taskController.createTask); //, taskController.createTask 
 
 router.get('/task/:taskId'); //, taskController.getTask
 
