@@ -1,10 +1,11 @@
 const express = require('express');
 const { body } = require('express-validator'); //for validation purposes
 const router = express.Router();
+const isAuth = require('../middleware/isAuth');
 
 const taskController = require('../controllers/task');
 
-router.get('/'); //, taskController.getTasks
+router.get('/', isAuth, taskController.getTasks); //, taskController.getTasks
 
 // TODO: Add validators back in
 router.post(

@@ -51,3 +51,17 @@ exports.createTask = (req, res, next) => {
             next(err);
         })
 };
+
+exports.getTasks = (req, res, next) => {
+    Task.find()
+    .then(tasks => {
+      console.log(tasks);
+        res.status(200).json({
+            tasks: tasks,
+        });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
