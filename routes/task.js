@@ -15,7 +15,7 @@ router.post(
     // ],
     taskController.createTask); //, taskController.createTask 
 
-router.get('/task/:taskId'); //, taskController.getTask
+router.get('/task/:taskId', taskController.getTask); //, taskController.getTask
 
 router.put('/task/:{taskId}'); //, taskController.updateTask 
 
