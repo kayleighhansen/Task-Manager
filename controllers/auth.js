@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken'); // JWT Academind Video: https://pro.academi
 const User = require('../models/user');
 const { validationResult } = require('express-validator');
 
-// TODO: Add other user logic here and in the user.js route
+// TODO: Implement company creation and saving
 exports.signup = (req, res, next) => {
    // This probably needs to be converted to 'signup'.
    if (!req.body.email || !req.body.password || !req.body.company) {
@@ -24,14 +24,14 @@ exports.signup = (req, res, next) => {
    const first_name = req.body.first_name;
    const last_name = req.body.last_name;
    const password = req.body.password;
-   // bcrypt.hash(req.body.password, 12); // TODO: change this to "Hashed Password, once that's implemented"
+   // bcrypt.hash(req.body.password, 12);
    const company = req.body.company;
    bcrypt
       .hash(password, 12)
       .then((hashedPw) => {
          const user = new User({
             email: email,
-            password: hashedPw, // TODO: change this to "Hashed Password, once that's implemented"
+            password: hashedPw,
             first_name: first_name,
             last_name: last_name,
             company: company,
