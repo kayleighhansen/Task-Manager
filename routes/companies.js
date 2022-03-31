@@ -5,12 +5,14 @@ const router = express.Router();
 const companyController = require('../controllers/company');
 const company = require('../models/company');
 
-router.get('/companies', companyController.getCompany); //, taskController.createTask 
+router.get('/companies', companyController.getCompanies); //, taskController.createTask 
 
-router.post('/companies/addcompany/:{companyId}', companyController.createCompany); //, taskController.getTasks
+router.get('/company/:companyId', companyController.getCompany); //, taskController.getTasks
 
-router.put('/companies/updateCompany/:{companyId}', companyController.updateCompany); //, taskController.getTask
+// router.post('/companies/addcompany/:{companyId}', companyController.createCompany); //, taskController.getTasks
 
-router.delete('companies/deleteCompany/:{companyId}', company.deleteCompany); //, taskController.updateTask 
+// router.put('/companies/updateCompany/:{companyId}', companyController.updateCompany); //, taskController.getTask
+
+// router.delete('companies/deleteCompany/:{companyId}', company.deleteCompany); //, taskController.updateTask 
 
 module.exports = router;
